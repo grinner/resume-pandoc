@@ -7,48 +7,50 @@ I've included my own resume in markdown format as an example.
 To create the LaTeX version, use:
 
 ~~~
-pandoc perl-programmer-john-bokma-resume.md -f markdown+yaml_metadata_block \
-  --template templates/jb2resume.latex \
-  -o perl-programmer-john-bokma-resume.tex
+pandoc nickconway_resume_column.md -f markdown+yaml_metadata_block \
+  --template templates/conway.latex \
+  -o conway-resume.tex
 ~~~
 
 And to create the PDF version, use:
 
 ~~~
-pandoc perl-programmer-john-bokma-resume.md -f markdown+yaml_metadata_block \
-  --template templates/jb2resume.latex \
-  -o perl-programmer-john-bokma-resume.pdf
+pandoc nickconway_resume_column.md -f markdown+yaml_metadata_block \
+  --template templates/conway.latex \
+  -o nick-conway-resume_2021.01.29.pdf
 ~~~
+
+~~~
+pandoc nickconway_resume_column_2022.09.05.md -f markdown+yaml_metadata_block \
+  --template templates/conway.latex \
+  -o nick-conway-resume_2022.09.05.pdf
+~~~
+
+~~~
+pdflatex /Users/nick/Downloads/nick_conway_letter_template.tex -output-format=pdf
+~~~
+
+## Getting Started on MacOS
+
+Run `brew install pandoc` to install Pandoc.
 
 ## Using Docker
 
 Create the Docker container image using:
 
-```
-docker build --tag=resume-pandoc .
-```
+`docker build --tag=resume-pandoc .`
 
 And run it using:
 
 ```
 docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` \
-    resume-pandoc perl-programmer-john-bokma-resume.md \
+    resume-pandoc nickconway_resume_column.md \
                   -f markdown+yaml_metadata_block \
-                  --template templates/jb2resume.latex \
-                  -o perl-programmer-john-bokma-resume.pdf
+                  --template templates/nickconway_resume_column.latex \
+                  -o nickconway_resume_column.pdf
 ```
 
-
-For more information, please read my blog entry
-[Giving Docker Desktop for macOS a Second
-Chance](http://johnbokma.com/blog/2021/06/02/giving-docker-desktop-for-macos-a-second-chance.html),
-which provides an easy walk-through.
-
-## Getting Started on Ubuntu 17.04
-
-Please read my blog entry
-[Installing the latest version of Pandoc on Ubuntu 17.04](http://johnbokma.com/blog/2017/05/17/installing-latest-pandoc-on-ubuntu.html), which
-provides an easy walk-through.
+For more information, please read John Bokma's blog entry [Giving Docker Desktop for macOS a Second Chance](http://johnbokma.com/blog/2021/06/02/giving-docker-desktop-for-macos-a-second-chance.html), which provides an easy walk-through.
 
 ## YAML Meta Block
 
@@ -65,7 +67,7 @@ left-column
 right-column
  : a list of lines you want in the right column, directly under the
    name on the first page.
-
+   
 fontsize
  : default `10pt`.
 
@@ -74,10 +76,10 @@ fontenc
 
 urlcolor
  : used in PDF, default `blue`.
-
+ 
 linkcolor
  : used in PDF, default `magenta`.
-
+ 
 numbersections
  : number sections, default off. Can also be controlled using the
  `pandoc` option `-N, --number-sections`.
@@ -94,14 +96,3 @@ section-color
 
 Regarding the last two options: if you just want to change the font to
 sans serif bold you can just use the color `black`.
-
-# Example PDF
-
-See [http://johnbokma.com/documents/perl-programmer-john-bokma-resume.pdf](http://johnbokma.com/documents/perl-programmer-john-bokma-resume.pdf).
-
-# Credits
-
-- Jason R. Blevins for making the LaTeX resume example that inspired this
-  template.
-- Christoph Frings and Andrew for their help with description list; reference
-  [enumitem: multiline label with text following label - TeX - LaTeX Stack Exchange](https://tex.stackexchange.com/questions/323903/enumitem-multiline-label-with-text-following-label).
